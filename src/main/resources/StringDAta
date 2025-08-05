@@ -1,0 +1,76 @@
+﻿SELECT * FROM TUR
+
+INSERT INTO tur (ad) VALUES ('Biyografi')
+
+SELECT * FROM yazar
+
+INSERT INTO yazar (ad,soyad) VALUES ('Nurettin','Belek')
+
+select * from ogrenci
+
+UPDATE ogrenci SET sinif = '10C' WHERE sinif = '10B'
+
+select * from kitap
+
+UPDATE kitap SET puan = puan + 5
+
+DELETE FROM yazar WHERE ad = 'Mehmet'
+
+DROP TABLE kitap
+
+INSERT INTO tur (ad) VALUES ('Kişisel Gelişim')
+
+UPDATE kitap SET turno = (
+	Select turno from tur where ad = 'Kişisel Gelişim'
+) where ad = 'Benim Üniversitelerim'
+
+
+CREATE FUNCTION ogrencilistesi()
+RETURNS SETOF ogrenci
+LANGUAGE sql
+AS
+$BODY$
+	SELECT * FROM OGRENCI
+$BODY$
+
+select * from ogrencilistesi()
+
+
+select * from kitap
+
+
+CREATE PROCEDURE EKLE (
+	NEWNAME CHARACTER VARYING,
+	NEWPUAN INT,
+	NEWYAZARNO BIGINT,
+	NEWTURNO BIGINT
+) LANGUAGE SQL AS $$
+    INSERT INTO kitap (ad, puan, yazarno, turno)
+    VALUES (newName, newPuan, newYazarno, newTurno);
+$$;
+
+
+CALL ekle('Yeni Kitap', 90, 1, 2);
+
+
+select * from ogrenci
+CREATE PROCEDURE sil (deleteNo BIGINT) LANGUAGE SQL AS $$
+	DELETE FROM ogrenci WHERE ogrno=deleteNo;
+$$
+
+SELECT * FROM ogrenci WHERE ogrno=2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
